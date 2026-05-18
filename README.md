@@ -1,121 +1,345 @@
-# Sales Data Coordinator — Order Lifecycle & Data Quality System
-- Microsoft Business Central ERP + Salesforce CRM Order Operations
+# Cannabis CPG Sales Data Coordinator Project
+
+A simulated CRM-to-ERP Sales Operations project focused on sales order lifecycle management, ERP/CRM style data quality, fulfillment coordination, invoicing support, credit memo workflows, returns/refusals, exception tracking, and SOP-style process documentation.
+
+This project was built as a portfolio case study for a **Sales Data Coordinator / Sales Operations / CRM-ERP Data Quality** role in a regulated cannabis CPG environment.
+
+> **Portfolio disclaimer:** This is a personal, simulated portfolio project. It is not affiliated with, endorsed by, sponsored by, or based on internal materials from any cannabis company. All data is synthetic/mock data. Salesforce and Microsoft Dynamics 365 Business Central are referenced only as conceptual CRM/ERP patterns; this project is not a live implementation of either platform.
+
+
+---
 
 ## Project Purpose
 
-This project simulates a Sales Data Coordinator workflow using Microsoft Dynamics 365 Business Central as the ERP/order management system and Salesforce as the CRM/account management system. The project demonstrates sales order entry, order edits, fulfillment coordination, invoicing, credit memo processing, returns/refusals, CRM-to-ERP data integrity, discrepancy resolution, dashboard/report support, and SOP documentation.
+Sales Data Coordinator roles often sit between Sales, Distribution, Inventory, Accounting, Customer Support, and Compliance. The goal of this project is to simulate that operating environment and show how order data can be validated, reconciled, corrected, documented, and reported across CRM-style and ERP-style systems.
 
-This project simulates the operational workflows of a Sales Data Coordinator supporting a fast-growing CPG/cannabis business. The goal is to demonstrate readiness for work involving sales order entry, order edits, fulfillment coordination, invoicing, credit memo processing, account data quality, CRM/ERP reconciliation, exception tracking, and basic operational reporting.
+The project models a realistic order-to-cash support workflow:
 
-The project is designed around the responsibilities of a Sales Data Coordinator role: maintaining clean sales order data, coordinating across Sales, Distribution, Inventory, and Accounting, and supporting accurate, timely, compliant order execution.
+1. CRM-style order intake and customer/account validation
+2. ERP-style order creation, order status tracking, and invoice support
+3. Fulfillment and warehouse coordination
+4. Inventory, SKU, and state-eligibility checks
+5. Returns, refusals, rejected orders, and credit memo routing
+6. Exception tracking and daily QA/QC review
+7. SOP-style documentation for repeatable operational processes
 
-I created a Salesforce Trailhead Playground to simulate CRM account management, imported account/customer data, configured fields relevant to order eligibility, then reconciled the CRM export against ERP-style sales order data in PostgreSQL.
+---
 
-## Business Scenario
+## Proof of Concept
 
-A multi-state cannabis edibles company receives sales orders from customers across multiple markets. Orders are entered into an ERP-style order management process, supported by CRM account data, inventory availability, shipment tracking, invoicing, and exception handling.
+The role essentially acts as the "bridge" between these two systems, ensuring that the sales data from the CRM flows accurately into the ERP for fulfillment, invoicing, and accounting.
 
-Common operational issues include:
+[Google Sheets Link](https://docs.google.com/spreadsheets/d/1w1cBCzS5EIMZS9mpNI-3vBf8JUKAd_BcGulS43WQB5o/edit?gid=84316029#gid=84316029)
 
-- Missing or invalid customer account data
-- CRM accounts that do not match ERP customer records
-- Orders placed for inactive or non-compliant accounts
-- SKU or state availability mismatches
-- Inventory shortages and backorders
-- Rejected, returned, or refused orders
-- Invoice totals that do not match fulfilled order totals
-- Credit memos created for short shipments, refusals, returns, or pricing errors
-- Open exceptions requiring follow-up from Sales, Distribution, Inventory, or Accounting
 
-## Project Modules
+## Visual Workflow Diagrams
 
-### 1. Sales Order Lifecycle Management
+Key process diagrams are stored in the `diagrams/` folder:
 
-Simulates the full order lifecycle:
+- `sales-data-coordinator-hub.mmd` — cross-functional coordination map
+- `order-lifecycle-flow.mmd` — end-to-end order lifecycle
+- `crm-to-erp-data-flow.mmd` — CRM/ERP data movement and reconciliation
+- `exception-escalation-flow.mmd` — order issue routing and resolution
+- `metrc-manifest-precheck-flow.mmd` — simulated compliance precheck workflow
 
-1. Order entered
-2. Order edited or approved
-3. Inventory checked
-4. Order fulfilled or backordered
-5. Shipment created
-6. Invoice issued
-7. Credit memo or return processed if needed
-8. Order closed
 
-### 2. CRM-to-ERP Account Reconciliation
+## What This Project Demonstrates
 
-Compares CRM-style account records to ERP-style customer records to identify master data issues that could block clean order execution.
+### Sales Operations
 
-Example checks:
+- End-to-end sales order lifecycle support
+- Order intake, order edits, cancellations, rejections, returns, and refusals
+- Fulfillment coordination and order status follow-up
+- Invoice and credit memo support workflows
+- Customer support case tracking and issue escalation
+- Cross-functional handoffs between Sales, Distribution, Inventory, Accounting, and Compliance
 
-- CRM account missing ERP customer ID
-- ERP customer missing CRM owner
-- Account name mismatch
-- Missing billing terms
-- Customer on credit hold
-- Inactive account with open orders
-- Missing license or compliance status
+### Data Quality and Reconciliation
 
-### 3. Order Exception Reporting
+- CRM/ERP account and customer crosswalks
+- SKU/item mapping and product lookup controls
+- Missing order, orphan invoice, and invoice mismatch checks
+- Pricing discrepancy detection
+- Inventory shortage and negative inventory flags
+- Fulfillment blocker tracking
+- Exception reason codes and ownership assignment
 
-Creates a structured exception tracker for rejected orders, returns, refusals, backorders, invoice mismatches, and credit memo issues.
+### Reporting and Documentation
 
-The reporting layer is designed to answer:
+- Excel-based sales operations workbooks
+- Order lifecycle dashboards and reconciliation summaries
+- SLA and exception tracking views
+- SQL views for revenue, open orders, inventory status, compliance flags, and account health
+- SOP-style documentation for repeatable sales operations processes
 
-- Which orders need follow-up?
-- Which team owns the issue?
-- Which issues are blocking fulfillment or invoicing?
-- How many credit memos were created by reason?
-- Which states, customers, or SKUs create the most exceptions?
+---
 
-## Source Systems Simulated
+## CRM and ERP Concept Mapping
 
-| Source | Business Function | Example Data |
+This project mirrors the **concepts** of Salesforce-style CRM workflows and Business Central-style ERP workflows.
+
+| Business Process Area | Salesforce-style CRM Concept | Business Central-style ERP Concept | Project Artifact |
+|---|---|---|---|
+| Customer/account management | Account, owner, customer status | Customer, bill-to/ship-to customer | `customer_lookup`, `customer_crosswalk`, `crm_orders` |
+| Product and pricing | Product, SKU, price book-style pricing | Item, item price, item availability | `product_lookup`, `field_mapping_crm_to_erp`, `inventory_snapshot` |
+| Order intake | CRM order/request | Sales order | `crm_orders`, `sales_orders`, SOP-OP-001 |
+| Fulfillment | Order status updates and customer follow-up | Shipment / delivery coordination | `warehouse_shipments`, SOP-OP-004 |
+| Invoicing | Customer/order communication | Sales invoice, AR, credit memo | `erp_invoices`, `accounts_receivable`, SOP-OP-005 |
+| Returns/refusals | Customer support case / order issue | Return order / credit memo workflow | `returns_credit_memos`, SOP-OP-003 |
+| Data quality | CRM hygiene and duplicate/mismatch checks | ERP reconciliation and posting support | `exception_log`, SQL views, `quality_check.py` |
+
+The project intentionally uses terms like **Salesforce-style** and **Business Central-style** because it is a simulated workflow, not a direct configuration of those systems.
+
+---
+
+## Repository Structure
+
+```text
+.
+├── README.md
+├── excel/
+│   ├── sales_ops_crm_erp_practice_workbook_enterprise.xlsx
+│   ├── wyld_sales_ops_crm_erp_practice.xlsx
+│   ├── Wyld_Sales_Order_Tracker.xlsx
+│   └── wyld-order-compliance.xlsx
+├── sql/
+│   ├── schema.sql
+│   ├── missing-orders.sql
+│   ├── dim_products.sql
+│   ├── dim_state_skus.sql
+│   └── 00_run_sales_data_coordinator_pipeline.sql
+├── scripts/
+│   ├── generate_project_data.py
+│   ├── database.py
+│   ├── quality_check.py
+│   ├── order_lifecycle.py
+│   ├── build_excel.py
+│   └── build_workbook.py
+├── SOP/
+│   ├── SOP-OP-001-order-intake-validation.md
+│   ├── SOP-OP-002-order-modification-process.md
+│   ├── SOP-OP-003-process-customer-returns-refusals.md
+│   ├── SOP-OP-004-fulfillment-manifest-delivery.md
+│   ├── SOP-OP-005-invoicing-credit-memo.md
+│   ├── SOP-OP-006-daily-sales-order-dq.md
+│   └── _OR_sales_order_sop_assumptions.md
+├── docs/
+│   ├── source_register.csv
+│   ├── exception_reason_codes.csv
+│   ├── flowchart.md
+│   ├── graph.md
+│   └── workflow-ppt-guide.md
+├── notes/
+│   ├── job-description.md
+│   ├── 0-METRC-compliance.md
+│   ├── getting-started.ipynb
+│   ├── interview-questions.ipynb
+│   └── repo-guide.ipynb
+└── views/
+    └── wyld_order_tracker_mockup.html
+```
+
+---
+
+## Key Excel Workbooks
+
+### `excel/sales_ops_crm_erp_practice_workbook_enterprise.xlsx`
+
+Primary reviewer workbook. It includes:
+
+- `executive_summary`
+- `dashboard`
+- `reconciliation_summary`
+- `sla_metrics`
+- `crm_orders`
+- `erp_invoices`
+- `warehouse_shipments`
+- `accounts_receivable`
+- `order_compliance_review`
+- `customer_support_cases`
+- `returns_credit_memos`
+- `inventory_snapshot`
+- `customer_crosswalk`
+- `field_mapping_crm_to_erp`
+- `compliance_rules`
+- `exception_log`
+- `customer_lookup`
+- `product_lookup`
+
+### `excel/Wyld_Sales_Order_Tracker.xlsx`
+
+A compact sales order tracker mockup with order tracking, discrepancy logging, summary views, and SOP references.
+
+### `excel/wyld-order-compliance.xlsx`
+
+A compliance-focused workbook with raw order data, compliance review logic, cleaned order outputs, rejection logging, and dashboarding.
+
+---
+
+## SOP Documentation
+
+The SOP folder documents repeatable order operations workflows from a Sales Data Coordinator perspective.
+
+| SOP | Process Area | Purpose |
 |---|---|---|
-| CRM Accounts | Sales / Account ownership | Account status, sales rep, market, contact fields |
-| ERP Customers | Order management / billing | Customer ID, billing terms, credit hold, license status |
-| Sales Orders | Order entry | Order headers, order dates, status, customer IDs |
-| Sales Order Lines | Order details | SKU, quantity, unit price, discounts |
-| Inventory Snapshot | Inventory availability | SKU, state, warehouse, available units |
-| Shipments | Distribution | Fulfilled quantity, shipped date, delivery/refusal status |
-| Invoices | Accounting | Invoice amount, invoice date, payment status |
-| Credit Memos | Accounting / Exceptions | Credit reason, amount, linked invoice/order |
+| `SOP-OP-001-order-intake-validation.md` | Order intake | Validate customer, SKU, quantity, pricing, and required documentation before order release |
+| `SOP-OP-002-order-modification-process.md` | Order edits | Control changes to orders before/after fulfillment milestones |
+| `SOP-OP-003-process-customer-returns-refusals.md` | Returns/refusals | Document customer refusals, return handling, credit memo routing, and exception logging |
+| `SOP-OP-004-fulfillment-manifest-delivery.md` | Fulfillment | Coordinate warehouse, delivery, manifest, and order status updates |
+| `SOP-OP-005-invoicing-credit-memo.md` | Accounting support | Support invoice review, credit memo requests, and billing exception resolution |
+| `SOP-OP-006-daily-sales-order-dq.md` | Data quality | Perform daily CRM/ERP order QA, reconciliation, and exception review |
+| `_OR_sales_order_sop_assumptions.md` | Compliance assumptions | Documents simulated Oregon cannabis workflow assumptions used in the project |
 
-## Key Skills Demonstrated
+The SOPs are intentionally written as **SOP-style documentation** for a portfolio project. They are not legal guidance and are not official compliance procedures.
 
-| Job responsibility                                      | Project evidence                                                            |
-| ------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Order lifecycle management                              | Business Central sales order workflow from entry to invoice/credit memo     |
-| Entry, edits, fulfillment, invoicing, credit memos      | Screenshots + SOPs + order tracker workbook                                 |
-| Additions, rejections, returns, refusals                | Order modification SOP and exception reason code log                        |
-| State-specific compliance                               | Compliance matrix by state, customer license status, SKU eligibility checks |
-| Accurate, timely, compliant order activity              | Daily follow-up queue and order status dashboard                            |
-| Maintain data across ERP/CRM/external systems           | Salesforce + Business Central exports reconciled in workbook                |
-| Identify and resolve discrepancies                      | CRM-to-ERP reconciliation tab and exception tracker                         |
-| Partner with Sales, Distribution, Inventory, Accounting | Owner team fields, escalation notes, response templates                     |
-| Customer support                                        | Customer support response templates and order status documentation          |
-| Power user of ERP/CRM tools                             | Business Central and Salesforce screenshots/notes                           |
-| Reporting and dashboard maintenance                     | Order status, exception, and data quality dashboards                        |
-| SOP documentation                                       | Order lifecycle SOP, credit memo SOP, data quality checklist                |
-| Ad hoc reporting                                        | Daily follow-up queue and issue summary report                              |
+---
 
-- Sales order lifecycle understanding
-- CRM/ERP-style data modeling
-- Data entry validation
-- Data quality checks
-- Cross-functional exception tracking
-- Account and customer master data reconciliation
-- Basic operational reporting
-- SQL-based QA/QC
-- SOP and process documentation
-- Dashboard-ready mart design
+## SQL Layer
 
-## Intended Audience
+The SQL files define a lightweight reporting and reconciliation layer for sales operations analysis.
 
-This project is designed for hiring managers evaluating readiness for Sales Data Coordinator, Sales Operations Coordinator, Data Coordinator, Business Operations Analyst, or entry-level Business Analyst roles.
+Notable views in `sql/schema.sql` include:
 
-## Portfolio Positioning
+- `vw_order_summary`
+- `vw_revenue_by_market`
+- `vw_revenue_by_rep`
+- `vw_product_performance`
+- `vw_account_health`
+- `vw_compliance_flags`
+- `vw_inventory_status`
+- `vw_open_orders`
 
-This project demonstrates the operational foundation behind analytics work. It shows the ability to work close to the business process before building higher-level reporting and analysis.
+Example use cases:
 
-The project connects naturally to broader analytics work in the rest of this portfolio, including operations dashboards, data quality systems, reconciliation workflows, and forecasting.
+- Identify open orders pending action
+- Review revenue by market or sales rep
+- Flag compliance-sensitive order lines
+- Identify accounts on credit hold
+- Review inventory status and reorder risks
+- Investigate invoice/order mismatches
+
+---
+
+## Python Scripts
+
+| Script | Purpose |
+|---|---|
+| `scripts/generate_project_data.py` | Generates synthetic sales operations data |
+| `scripts/database.py` | Loads CSV data into SQLite and runs validation queries |
+| `scripts/quality_check.py` | Performs QA/QC checks and exception analysis |
+| `scripts/order_lifecycle.py` | Simulates order lifecycle actions such as processing, fulfillment, invoicing, rejection, returns, refusals, and order modifications |
+| `scripts/build_excel.py` | Builds Excel reporting outputs from the database layer |
+| `scripts/build_workbook.py` | Builds a standalone workbook-style order operations tracker |
+
+---
+
+## Suggested Reviewer Path
+
+For a quick review, start here:
+
+1. Open `excel/sales_ops_crm_erp_practice_workbook_enterprise.xlsx`
+2. Review the `dashboard`, `reconciliation_summary`, and `exception_log` tabs
+3. Review `field_mapping_crm_to_erp`, `customer_crosswalk`, and `order_compliance_review`
+4. Open `SOP/SOP-OP-001-order-intake-validation.md`
+5. Open `SOP/SOP-OP-002-order-modification-process.md`
+6. Open `SOP/SOP-OP-006-daily-sales-order-dq.md`
+7. Review `docs/exception_reason_codes.csv`
+8. Review `sql/schema.sql` for the reporting views
+
+---
+
+## Example QA/QC Scenarios Modeled
+
+The project includes controls and exception categories for:
+
+- Missing ERP customer IDs
+- CRM/ERP customer mismatches
+- Credit holds
+- Inactive customer accounts
+- Missing license or compliance documentation
+- SKU not available in destination state
+- Insufficient inventory
+- Short shipments
+- Customer refusals
+- Damaged returns
+- Pricing errors
+- Duplicate orders
+- Missing invoices
+- Invoice amount mismatches
+- Negative inventory
+- Documentation gaps
+
+---
+
+## Compliance-Aware Design
+
+The project includes Oregon cannabis workflow assumptions and Metrc/OLCC-aware documentation concepts. These are used to model how a Sales Data Coordinator may support regulated order workflows by validating, flagging, documenting, and escalating issues.
+
+The project does **not** provide legal advice, official compliance instructions, or company-specific compliance procedures.
+
+Sales Data Coordinator framing:
+
+- Supports order accuracy and documentation completeness
+- Flags compliance-sensitive exceptions
+- Maintains CRM/ERP data integrity
+- Routes issues to Compliance, Accounting, Inventory, or Distribution
+- Documents exceptions and resolution status
+- Does not independently approve regulatory compliance decisions
+
+---
+
+## How This Project Maps to a Sales Data Coordinator Role
+
+| Role Responsibility | Project Evidence |
+|---|---|
+| Execute sales order lifecycle | Order intake, edits, fulfillment, invoicing, returns, refusals, rejected-order workflows |
+| Maintain ERP/CRM data integrity | Customer crosswalks, field mapping, quality checks, exception log |
+| Support fulfillment coordination | Warehouse shipment data, delivery status, fulfillment SOPs |
+| Support invoicing and credit memos | ERP invoice data, AR data, credit memo workflows, invoicing SOP |
+| Resolve discrepancies | QA/QC scripts, exception reason codes, mismatch checks |
+| Support reporting and dashboards | Excel dashboards, SQL views, SLA metrics, reconciliation summaries |
+| Document SOPs | SOP folder covering intake, modifications, fulfillment, returns, invoicing, and daily data quality |
+| Work cross-functionally | Process handoffs across Sales, Distribution, Inventory, Accounting, Customer Support, and Compliance |
+
+---
+
+## Skills Demonstrated
+
+- Sales operations process design
+- Order lifecycle tracking
+- ERP/CRM data quality review
+- Excel/Google Sheets-style reporting
+- SQL reporting views
+- Python/pandas data generation and QA/QC scripting
+- Exception tracking and root-cause categorization
+- SOP-style documentation
+- Cannabis compliance awareness
+- Cross-functional workflow mapping
+
+---
+
+## Limitations
+
+This is a simulated project, so it does not include:
+
+- A live Salesforce org
+- A live Business Central tenant
+- Real customer, order, inventory, or compliance data
+- Official company SOPs
+- Official Metrc/OLCC compliance procedures
+- Production-grade access controls or audit logging
+
+The value of the project is in the workflow design, data model, reconciliation logic, documentation, and operational reasoning.
+
+---
+
+## Author
+
+**Brandon Hardison**
+GitHub: [github.com/cat-cols](https://github.com/cat-cols)
+
+---
+
+## Disclaimer
+
+This project is a personal portfolio piece and is not affiliated with, endorsed by, or sponsored by Wyld. All data used is synthetic/mock data created solely to demonstrate technical proficiency for a Sales Data Coordinator role.
