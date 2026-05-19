@@ -81,7 +81,7 @@ ws_prod.row_dimensions[2].height = 22
 
 ws_prod.merge_cells("A1:K1")
 t = ws_prod["A1"]
-t.value = "WYLD — Product Catalog"
+t.value = "MYLD — Product Catalog"
 t.font  = TITLE_FONT
 t.alignment = LEFT
 t.fill = WHITE_FILL
@@ -93,13 +93,13 @@ for i, (h, w) in enumerate(zip(prod_headers, col_widths), 1):
     header_cell(ws_prod, 2, i, h, width=w)
 
 products = [
-    ("WLD-GUM-HUCK-10",  "Wyld Huckleberry Gummies 10mg THC",        "Edible",   18.00, 12, "✓","✓","✓","✓","✓","","","","",""),
-    ("WLD-GUM-RASP-10",  "Wyld Raspberry Gummies 10mg THC",           "Edible",   18.00, 12, "✓","✓","✓","✓","✓","✓","✓","","",""),
-    ("WLD-GUM-BBLM-1-1", "Wyld Blackberry Gummies 1:1 CBD:THC",       "Edible",   20.00, 12, "✓","✓","✓","✓","","","","","",""),
-    ("WLD-BEV-HUCK-5",   "Wyld Huckleberry Sparkling Water 5mg",      "Beverage",  6.00, 24, "✓","✓","✓","","","","","","",""),
-    ("WLD-BEV-LEMON-5",  "Wyld Lemon Sparkling Water 5mg",            "Beverage",  6.00, 24, "✓","✓","✓","✓","✓","","","","",""),
-    ("WLD-GUM-PEACH-2-1","Wyld Peach Gummies 2:1 CBD:THC",            "Edible",   22.00, 12, "✓","","✓","✓","","","","","",""),
-    ("WLD-GUM-STRAW-10", "Wyld Strawberry Gummies 10mg THC",          "Edible",   18.00, 12, "","","","","","✓","✓","✓","✓","✓"),
+    ("MLD-GUM-HUCK-10",  "Myld Huckleberry Gummies 10mg THC",        "Edible",   18.00, 12, "✓","✓","✓","✓","✓","","","","",""),
+    ("MLD-GUM-RASP-10",  "Myld Raspberry Gummies 10mg THC",           "Edible",   18.00, 12, "✓","✓","✓","✓","✓","✓","✓","","",""),
+    ("MLD-GUM-BBLM-1-1", "Myld Blackberry Gummies 1:1 CBD:THC",       "Edible",   20.00, 12, "✓","✓","✓","✓","","","","","",""),
+    ("MLD-BEV-HUCK-5",   "Myld Huckleberry Sparkling Water 5mg",      "Beverage",  6.00, 24, "✓","✓","✓","","","","","","",""),
+    ("MLD-BEV-LEMON-5",  "Myld Lemon Sparkling Water 5mg",            "Beverage",  6.00, 24, "✓","✓","✓","✓","✓","","","","",""),
+    ("MLD-GUM-PEACH-2-1","Myld Peach Gummies 2:1 CBD:THC",            "Edible",   22.00, 12, "✓","","✓","✓","","","","","",""),
+    ("MLD-GUM-STRAW-10", "Myld Strawberry Gummies 10mg THC",          "Edible",   18.00, 12, "","","","","","✓","✓","✓","✓","✓"),
 ]
 
 for r, p in enumerate(products, 3):
@@ -136,7 +136,7 @@ ws_acc.row_dimensions[2].height = 22
 
 ws_acc.merge_cells("A1:H1")
 t = ws_acc["A1"]
-t.value = "WYLD — Account Master"
+t.value = "MYLD — Account Master"
 t.font  = TITLE_FONT; t.alignment = LEFT; t.fill = WHITE_FILL
 
 acc_headers = ["Account ID","Account Name","State","License #","Payment Terms","Active","Credit Limit","Notes"]
@@ -185,7 +185,7 @@ ws_comp.row_dimensions[2].height = 22
 
 ws_comp.merge_cells("A1:I1")
 t = ws_comp["A1"]
-t.value = "WYLD — State Compliance Rules (Reference)"
+t.value = "MYLD — State Compliance Rules (Reference)"
 t.font  = TITLE_FONT; t.alignment = LEFT; t.fill = WHITE_FILL
 
 comp_headers = ["State","Max THC/Unit (mg)","Max THC/Pkg (mg)","Metrc Required",
@@ -245,7 +245,7 @@ ws_ord.row_dimensions[3].height = 22
 
 ws_ord.merge_cells("A1:R1")
 t = ws_ord["A1"]
-t.value = "WYLD — Sales Order Log"
+t.value = "MYLD — Sales Order Log"
 t.font  = TITLE_FONT; t.alignment = LEFT; t.fill = WHITE_FILL
 
 ws_ord.merge_cells("A2:R2")
@@ -279,31 +279,31 @@ today = datetime.date.today()
 sample_orders = [
     # ord_id, date, acc_id, acc_name, state, sku, prod_name, ord_qty, unit_price, ful_qty, status, inv, inv_date, due, cm, notes
     ("ORD-A1B2C3D4", today - datetime.timedelta(days=30), "ACC-001","Green Leaf Dispensary","OR",
-     "WLD-GUM-HUCK-10","Wyld Huckleberry Gummies 10mg",10,18.00,10,"Closed",
+     "MLD-GUM-HUCK-10","Myld Huckleberry Gummies 10mg",10,18.00,10,"Closed",
      "INV-001", today - datetime.timedelta(days=28), today + datetime.timedelta(days=2),"",""),
     ("ORD-A1B2C3D4", today - datetime.timedelta(days=30), "ACC-001","Green Leaf Dispensary","OR",
-     "WLD-GUM-RASP-10","Wyld Raspberry Gummies 10mg",  5, 18.00,5,"Closed",
+     "MLD-GUM-RASP-10","Myld Raspberry Gummies 10mg",  5, 18.00,5,"Closed",
      "INV-001", today - datetime.timedelta(days=28), today + datetime.timedelta(days=2),"",""),
     ("ORD-E5F6G7H8", today - datetime.timedelta(days=14), "ACC-003","The Healing Center","CA",
-     "WLD-GUM-HUCK-10","Wyld Huckleberry Gummies 10mg",8, 18.00,8,"Invoiced",
+     "MLD-GUM-HUCK-10","Myld Huckleberry Gummies 10mg",8, 18.00,8,"Invoiced",
      "INV-002", today - datetime.timedelta(days=12), today + datetime.timedelta(days=18),"CM-001","Damaged in transit — 2 units. CM issued."),
     ("ORD-E5F6G7H8", today - datetime.timedelta(days=14), "ACC-003","The Healing Center","CA",
-     "WLD-BEV-LEMON-5","Wyld Lemon Sparkling Water 5mg",12,6.00, 12,"Invoiced",
+     "MLD-BEV-LEMON-5","Myld Lemon Sparkling Water 5mg",12,6.00, 12,"Invoiced",
      "INV-002", today - datetime.timedelta(days=12), today + datetime.timedelta(days=18),"",""),
     ("ORD-I9J0K1L2", today - datetime.timedelta(days=7),  "ACC-002","Emerald City Cannabis","WA",
-     "WLD-GUM-RASP-10","Wyld Raspberry Gummies 10mg",  6, 18.00,6,"Fulfillment",
+     "MLD-GUM-RASP-10","Myld Raspberry Gummies 10mg",  6, 18.00,6,"Fulfillment",
      "","","","",""),
     ("ORD-M3N4O5P6", today - datetime.timedelta(days=3),  "ACC-004","Mile High Dispensary","CO",
-     "WLD-GUM-BBLM-1-1","Wyld Blackberry Gummies 1:1", 4, 20.00,0,"Confirmed",
+     "MLD-GUM-BBLM-1-1","Myld Blackberry Gummies 1:1", 4, 20.00,0,"Confirmed",
      "","","","",""),
     ("ORD-M3N4O5P6", today - datetime.timedelta(days=3),  "ACC-004","Mile High Dispensary","CO",
-     "WLD-GUM-PEACH-2-1","Wyld Peach Gummies 2:1",     6, 22.00,0,"Confirmed",
+     "MLD-GUM-PEACH-2-1","Myld Peach Gummies 2:1",     6, 22.00,0,"Confirmed",
      "","","","",""),
     ("ORD-Q7R8S9T0", today - datetime.timedelta(days=1),  "ACC-007","Bay Area Botanicals","CA",
-     "WLD-GUM-HUCK-10","Wyld Huckleberry Gummies 10mg",15,18.00,0,"Submitted",
+     "MLD-GUM-HUCK-10","Myld Huckleberry Gummies 10mg",15,18.00,0,"Submitted",
      "","","","",""),
     ("ORD-U1V2W3X4", today,                               "ACC-005","Silver State Cannabis","NV",
-     "WLD-BEV-HUCK-5","Wyld Huckleberry Sparkling Water",24,6.00,0,"Draft",
+     "MLD-BEV-HUCK-5","Myld Huckleberry Sparkling Water",24,6.00,0,"Draft",
      "","","","",""),
 ]
 
@@ -377,7 +377,7 @@ ws_inv.row_dimensions[2].height = 22
 
 ws_inv.merge_cells("A1:L1")
 t = ws_inv["A1"]
-t.value = "WYLD — Invoice Tracker"
+t.value = "MYLD — Invoice Tracker"
 t.font  = TITLE_FONT; t.alignment = LEFT; t.fill = WHITE_FILL
 
 inv_headers = ["Invoice #","Order ID","Account Name","State","Invoice Date",
@@ -432,7 +432,7 @@ ws_cm.row_dimensions[2].height = 22
 
 ws_cm.merge_cells("A1:K1")
 t = ws_cm["A1"]
-t.value = "WYLD — Credit Memo Log"
+t.value = "MYLD — Credit Memo Log"
 t.font  = TITLE_FONT; t.alignment = LEFT; t.fill = WHITE_FILL
 
 cm_headers = ["Memo #","Invoice #","Order ID","Account Name","State","Memo Date",
@@ -479,7 +479,7 @@ ws_dash.column_dimensions["A"].width = 2
 # Title bar
 ws_dash.merge_cells("B1:L1")
 t = ws_dash["B1"]
-t.value = "WYLD — Sales Operations Dashboard"
+t.value = "MYLD — Sales Operations Dashboard"
 t.font  = Font(name="Arial", bold=True, size=18, color=WHITE)
 t.alignment = LEFT
 t.fill = GREEN_FILL
@@ -625,8 +625,3 @@ for i, (st, ret, win, tax) in enumerate(quick_states, 23):
     else:
         ret_cell.font = Font(name="Arial", size=10, bold=True, color="C0392B")
 
-
-# ─── Final tab order ──────────────────────────────────────────────────────────
-out = "/home/claude/Wyld_Sales_Order_Tracker.xlsx"
-wb.save(out)
-print(f"Saved: {out}")

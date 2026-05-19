@@ -4,9 +4,6 @@ A simulated CRM-to-ERP Sales Operations project focused on sales order lifecycle
 
 This project was built as a portfolio case study for a **Sales Data Coordinator / Sales Operations / CRM-ERP Data Quality** role in a regulated cannabis CPG environment.
 
-> **Portfolio disclaimer:** This is a personal, simulated portfolio project. It is not affiliated with, endorsed by, sponsored by, or based on internal materials from any cannabis company. All data is synthetic/mock data. Salesforce and Microsoft Dynamics 365 Business Central are referenced only as conceptual CRM/ERP patterns; this project is not a live implementation of either platform.
-
-
 ---
 
 ## Project Purpose

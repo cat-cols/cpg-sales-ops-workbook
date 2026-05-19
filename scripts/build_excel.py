@@ -1,9 +1,9 @@
 """
 build_excel.py
 ==============
-Wyld Sales Operations — Excel Workbook Builder
+Myld Sales Operations — Excel Workbook Builder
 
-Produces wyld_sales_report.xlsx with 8 fully formatted sheets:
+Produces Myld_sales_report.xlsx with 8 fully formatted sheets:
 
   0. Dashboard       KPI cards + charts (the executive view)
   1. Orders          Full order register with filters + conditional formatting
@@ -134,7 +134,7 @@ def build_dashboard(ws, conn):
     # ── Title banner ──────────────────────────────────────────────────────
     ws.merge_cells("B1:N3")
     title = ws["B1"]
-    title.value     = "WYLD DISTRIBUTION — SALES OPERATIONS DASHBOARD"
+    title.value     = "MYLD DISTRIBUTION — SALES OPERATIONS DASHBOARD"
     title.font      = Font(bold=True, size=18, color=WHITE, name="Arial")
     title.fill      = fill(WYLD_GREEN)
     title.alignment = center()
@@ -410,7 +410,7 @@ def build_orders_sheet(ws, conn):
     # Title
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
     title = ws["A1"]
-    title.value     = "Order Register — Wyld Distribution Co."
+    title.value     = "Order Register — Myld Distribution Co."
     title.font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     title.fill      = fill(WYLD_GREEN)
     title.alignment = center()
@@ -480,7 +480,7 @@ def build_order_items_sheet(ws, conn):
 
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
     title = ws["A1"]
-    title.value     = "Order Line Items — Wyld Distribution Co."
+    title.value     = "Order Line Items — Myld Distribution Co."
     title.font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     title.fill      = fill(WYLD_GREEN)
     title.alignment = center()
@@ -515,7 +515,7 @@ def build_revenue_sheet(ws, conn):
 
     # Section 1: By Market
     ws.merge_cells("A1:H1")
-    ws["A1"].value     = "Revenue Analysis — Wyld Distribution Co."
+    ws["A1"].value     = "Revenue Analysis — Myld Distribution Co."
     ws["A1"].font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     ws["A1"].fill      = fill(WYLD_GREEN)
     ws["A1"].alignment = center()
@@ -614,7 +614,7 @@ def build_product_sheet(ws, conn):
     widths  = [10, 32, 10, 9, 12, 14, 13, 16, 12, 10, 10, 10, 14, 12]
 
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
-    ws["A1"].value     = "Product Performance — Wyld Distribution Co."
+    ws["A1"].value     = "Product Performance — Myld Distribution Co."
     ws["A1"].font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     ws["A1"].fill      = fill(WYLD_GREEN)
     ws["A1"].alignment = center()
@@ -671,7 +671,7 @@ def build_inventory_sheet(ws, conn):
     widths  = [10, 32, 10, 12, 10, 11, 10, 10, 14, 14, 18, 14]
 
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
-    ws["A1"].value     = "Inventory Status — Wyld Distribution Co."
+    ws["A1"].value     = "Inventory Status — Myld Distribution Co."
     ws["A1"].font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     ws["A1"].fill      = fill(WYLD_GREEN)
     ws["A1"].alignment = center()
@@ -725,7 +725,7 @@ def build_account_health_sheet(ws, conn):
     widths  = [12, 28, 10, 9, 16, 14, 15, 10, 14, 15, 14, 18, 13, 13, 10, 10, 13]
 
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
-    ws["A1"].value     = "Account Health — Wyld Distribution Co."
+    ws["A1"].value     = "Account Health — Myld Distribution Co."
     ws["A1"].font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     ws["A1"].fill      = fill(WYLD_GREEN)
     ws["A1"].alignment = center()
@@ -792,7 +792,7 @@ def build_qc_sheet(ws, conn):
     widths  = [11, 18, 28, 16, 14, 16, 22, 45, 40]
 
     ws.merge_cells(f"A1:{get_column_letter(len(headers))}1")
-    ws["A1"].value     = "Data Quality & Compliance Report — Wyld Distribution Co."
+    ws["A1"].value     = "Data Quality & Compliance Report — Myld Distribution Co."
     ws["A1"].font      = Font(bold=True, size=13, color=WHITE, name="Arial")
     ws["A1"].fill      = fill("7B241C")
     ws["A1"].alignment = center()
@@ -863,14 +863,14 @@ TAB_COLORS = [
 
 
 def build_workbook() -> Path:
-    out_path = Path("wyld_sales_report.xlsx")
+    out_path = Path("myld_sales_report.xlsx")
     conn     = get_connection()
     wb       = Workbook()
 
     # Remove default sheet
     wb.remove(wb.active)
 
-    print("\n Wyld Sales Ops — Excel Workbook Builder")
+    print("\n Myld Sales Ops — Excel Workbook Builder")
     print("=" * 42)
 
     for (name, builder), tab_color in zip(SHEETS, TAB_COLORS):

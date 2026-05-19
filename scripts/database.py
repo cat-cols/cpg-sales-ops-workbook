@@ -1,7 +1,7 @@
 """
 database.py
 ===========
-Wyld Sales Operations — Database Layer
+Myld Sales Operations — Database Layer
 
 Loads all CSV data into a SQLite database, applies the schema
 (tables, indexes, views), and exposes a clean query interface used
@@ -20,9 +20,9 @@ from pathlib import Path
 
 import pandas as pd
 
-DB_PATH   = Path("wyld_sales.db")
-SCHEMA    = Path("schema.sql")
-DATA_DIR  = Path("data")
+DB_PATH   = Path("myld_sales.db")
+SCHEMA = Path(__file__).parent.parent / "sql" / "schema.sql"
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 # CSV → table name mapping (load order respects FK dependencies)
 CSV_TABLES = [
@@ -261,7 +261,7 @@ def table_exists(conn: sqlite3.Connection, name: str) -> bool:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Wyld Sales Ops — database builder")
+    parser = argparse.ArgumentParser(description="Myld Sales Ops — database builder")
     parser.add_argument("--rebuild", action="store_true",
                         help="Drop and recreate the database from scratch")
     parser.add_argument("--query", type=str, default=None,
@@ -270,7 +270,7 @@ def main() -> None:
                         help="Run validation report on existing DB (no rebuild)")
     args = parser.parse_args()
 
-    print("\n Wyld Sales Ops — Database Layer")
+    print("\n Myld Sales Ops — Database Layer")
     print("=" * 42)
 
     if args.validate_only and DB_PATH.exists():

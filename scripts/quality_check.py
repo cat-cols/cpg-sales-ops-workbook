@@ -1,7 +1,7 @@
 """
 quality_check.py
 ================
-Wyld Sales Operations — Data Quality & Compliance Checker
+Myld Sales Operations — Data Quality & Compliance Checker
 
 Scans all tables for data integrity issues, business rule violations,
 and state compliance problems. Outputs a prioritized QC report to:
@@ -611,7 +611,7 @@ def run_checks(
         checks = {k: v for k, v in ALL_CHECKS.items()
                   if k == category_filter.lower().replace(" ", "_")}
 
-    print("\n Wyld Sales Ops — Quality Check")
+    print("\n Myld Sales Ops — Quality Check")
     print("=" * 42)
     print(f"  Run date: {report.run_date}")
     print(f"  Checks:   {', '.join(checks.keys())}\n")
@@ -683,8 +683,25 @@ def print_report(report: QCReport, severity_filter: Optional[str] = None) -> Non
 # ---------------------------------------------------------------------------
 
 def main() -> None:
+
+    # --- Guard: verify DB is built before running checks ---
+    if not DB_PATH.exists():
+        print(f"\n  ERROR: Database not found at '{DB_PATH}'")
+        print("  Run 'python database.py' first to build it.\n")
+        import sys; sys.exit(1)
+
+    conn = get_connection()
+    try:
+        conn.execute("SELECT 1 FROM orders LIMIT 1")
+    except Exception:
+        print(f"\n  ERROR: Database exists but 'orders' table is missing.")
+        print("  Run 'python database.py --rebuild' to repopulate it.\n")
+        conn.close()
+        import sys; sys.exit(1)
+    conn.close()
+
     parser = argparse.ArgumentParser(
-        description="Wyld Sales Ops — Data Quality Checker"
+        description="Myld Sales Ops — Data Quality Checker"
     )
     parser.add_argument("--category", type=str, default=None,
                         choices=list(ALL_CHECKS.keys()),
