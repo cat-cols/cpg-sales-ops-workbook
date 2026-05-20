@@ -32,11 +32,15 @@ The role essentially acts as the "bridge" between these two systems, ensuring th
 
 Key process diagrams are stored in the `diagrams/` folder:
 
-- `sales-data-coordinator-hub.mmd` — cross-functional coordination map
-- `order-lifecycle-flow.mmd` — end-to-end order lifecycle
-- `crm-to-erp-data-flow.mmd` — CRM/ERP data movement and reconciliation
-- `exception-escalation-flow.mmd` — order issue routing and resolution
-- `metrc-manifest-precheck-flow.mmd` — simulated compliance precheck workflow
+<!-- - `sales-data-coordinator-hub.mmd` — cross-functional coordination map -->
+<!-- - `metrc-manifest-precheck-flow.md` — simulated compliance precheck workflow -->
+<!-- - `order-lifecycle-flow.md` — end-to-end order lifecycle
+- `crm-to-erp-data-flow.md` — CRM/ERP data movement and reconciliation
+- `exception-escalation-flow.md` — order issue routing and resolution -->
+
+- `sales-data-coordinator-role-lanes.md` — maps the Sales Data Coordinator as the central link between CRM/ERP order workflows, cross-functional sales operations teams, and compliance controls required to support accurate, timely order processing.
+- `sales-data-coordinator-hub.md` — shows the Sales Data Coordinator as the central coordination point between Sales, Warehouse/Distribution, Inventory, Accounting, and Compliance, highlighting how order status, fulfillment updates, inventory checks, invoice matching, credits, and compliance flags are communicated across teams.
+- `order-lifecycle-flow.md` — documents the end-to-end order-to-cash workflow, showing how orders move from CRM/sales intake through ERP validation, compliance checks, fulfillment, delivery closeout, invoicing, and exception resolution.
 
 
 ## What This Project Demonstrates
