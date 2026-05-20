@@ -26,8 +26,7 @@ The project models a realistic order-to-cash support workflow:
 
 The role essentially acts as the "bridge" between these two systems, ensuring that the sales data from the CRM flows accurately into the ERP for fulfillment, invoicing, and accounting.
 
-[Google Sheets Link](https://docs.google.com/spreadsheets/d/1w1cBCzS5EIMZS9mpNI-3vBf8JUKAd_BcGulS43WQB5o/edit?gid=84316029#gid=84316029)
-
+[Google Sheets Link](https://docs.google.com/spreadsheets/d/1NmYQMLi_Hznw3nsGgtm6kc1BNOEkxviL/edit?gid=413146616#gid=413146616)
 
 ## Visual Workflow Diagrams
 
